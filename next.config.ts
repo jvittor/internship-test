@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   eslint: {
     dirs: ['src'],
   },
+  images: {
+    domains: ['via.placeholder.com', 'mighty.tools'],
+  },
 };
 
 export default nextConfig;
