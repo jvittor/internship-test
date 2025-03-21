@@ -15,7 +15,6 @@ import { FavoriteBorder, ChatBubbleOutline, Share } from '@mui/icons-material';
 import { Post } from '@/lib/entities/home/post';
 import { Comment } from '@/lib/entities/home/comments';
 import { CommentUseCases } from '@/lib/usecases/comments.usecases';
-import { PhotosUseCases } from '@/lib/usecases/photos.usecases';
 
 const PostCard = ({ post }: { post: Post }) => {
   const [comments, setComments] = React.useState<Comment[]>([]);
