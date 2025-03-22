@@ -1,5 +1,5 @@
 // src/lib/useCases/CategoriesUseCases.ts
-import { Categories } from '../entities/home/Categories';
+import { Categories } from '../entities/home/categories';
 
 export class CategoriesUseCases {
   static async getCategories(category: string): Promise<Categories[]> {
