@@ -1,25 +1,32 @@
-/* eslint-disable @next/next/no-async-client-component */
 'use client';
 
+import { useEffect, useState } from 'react';
 import { CategoriesUseCases } from '@/lib/usecases/categories.usecases';
 import { Categories } from '@/lib/entities/home/categories';
 import ProductList from '@/lib/pages/product/components/product';
 import Breadcrumbs from '@/lib/components/breadcrumbs';
 
-export default async function CategoryPage({
+export default function CategoryPage({
   params,
 }: {
   params: { category: string };
 }) {
   const category = decodeURIComponent(params.category);
+  const [products, setProducts] = useState<Categories[]>([]);
 
-  let products: Categories[] = [];
-  try {
-    console.log('Buscando produtos para categoria:', category);
-    products = await CategoriesUseCases.getCategories(category);
-  } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
-  }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        console.log('Buscando produtos para categoria:', category);
+        const data = await CategoriesUseCases.getCategories(category);
+        setProducts(data);
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    };
+
+    fetchProducts();
+  }, [category]);
 
   return (
     <>
