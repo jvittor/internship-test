@@ -2,7 +2,7 @@
 'use client';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Categories } from '@/lib/entities/home/Categories';
+import { Categories } from '@/lib/entities/home/categories';
 import { CategoriesUseCases } from '@/lib/usecases/categories.usecases';
 import CategoryGrid from '@/lib/pages/home/components/category-grid';
 

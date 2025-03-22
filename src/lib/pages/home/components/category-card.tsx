@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { Card, CardHeader, Image } from '@heroui/react';
-import { Categories } from '@/lib/entities/home/Categories';
+import { Categories } from '@/lib/entities/home/categories';
 
 const CategoryCard = ({
   category,
