@@ -14,7 +14,7 @@ export default function ProductList({ products }: { products: Categories[] }) {
             shadow="sm"
             onPress={() => console.log('item pressed')}
           >
-            <CardBody className="overflow-visible p-0">
+            <CardBody className="overflow-visible rounded-lg p-0">
               <Image
                 alt={item.title}
                 className="h-[140px] w-full object-cover"
@@ -25,8 +25,12 @@ export default function ProductList({ products }: { products: Categories[] }) {
               />
             </CardBody>
             <CardFooter className="text-small justify-between">
-              <b>{item.title}</b>
               <p className="text-default-500">${item.price.toFixed(2)}</p>
+              <b className="text-sm font-normal">
+                {item.title.split(' ').length > 2
+                  ? item.title.split(' ').slice(0, 2).join(' ') + '...'
+                  : item.title}
+              </b>
             </CardFooter>
           </Card>
         ))
