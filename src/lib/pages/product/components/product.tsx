@@ -2,10 +2,12 @@ import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 import { Categories } from '@/lib/entities/home/categories';
 
 export default function ProductList({ products }: { products: Categories[] }) {
+  const safeProducts = products || [];
+
   return (
     <div className="flex grid w-4xl grid-cols-2 gap-2 sm:grid-cols-4">
-      {products.length > 0 ? (
-        products.map((item) => (
+      {safeProducts.length > 0 ? (
+        safeProducts.map((item) => (
           <Card
             key={item.id}
             isPressable
