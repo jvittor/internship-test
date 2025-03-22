@@ -1,6 +1,5 @@
 'use client';
 import * as React from 'react';
-import Link from 'next/link';
 import CategoryCard from '@/lib/pages/home/components/category-card';
 import { Categories } from '@/lib/entities/home/categories';
 
@@ -20,45 +19,45 @@ const CategoryGrid = ({
           {category === "men's clothing" && (
             <>
               <div>drip on point, no effort!</div>
-              <Link
+              <a
                 href={`/category/men's clothing`}
                 className="rounded-2xl bg-[#5e035a] p-2 text-white hover:bg-[#71046c]"
               >
                 style it out
-              </Link>
+              </a>
             </>
           )}
           {category === "women's clothing" && (
             <>
               <div>flawless fit, zero stress!</div>
-              <Link
+              <a
                 href={`/category/women's clothing`}
                 className="rounded-2xl bg-[#d5008f] p-2 text-white hover:bg-[#e700a8]"
               >
                 slay the look
-              </Link>
+              </a>
             </>
           )}
           {category === 'electronics' && (
             <>
               <div>tech that fits your life!</div>
-              <Link
+              <a
                 href={`/category/electronics`}
                 className="rounded-2xl bg-[#00bfa5] p-2 text-white hover:bg-[#00e5c2]"
               >
                 shop now
-              </Link>
+              </a>
             </>
           )}
           {category === 'jewelery' && (
             <>
               <div>shine bright like a diamond!</div>
-              <Link
+              <a
                 href={`/category/jewelery`}
                 className="rounded-2xl bg-[#ff6d00] p-2 text-white hover:bg-[#ff9100]"
               >
                 get the bling
-              </Link>
+              </a>
             </>
           )}
         </p>
