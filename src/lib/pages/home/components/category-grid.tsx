@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import Link from 'next/link';
 import CategoryCard from '@/lib/pages/home/components/category-card';
 import { Categories } from '@/lib/entities/home/categories';
 
@@ -15,49 +16,49 @@ const CategoryGrid = ({
       <h2 className="mt-10 mb-4 text-left text-2xl font-bold text-black">
         {category.toLowerCase()}
         <br />
-        <p className="font-tiny text-gray-500w-full flex items-center justify-between text-sm">
+        <p className="font-tiny flex w-full items-center justify-between text-sm text-gray-500">
           {category === "men's clothing" && (
             <>
               <div>drip on point, no effort!</div>
-              <a
-                href="#"
+              <Link
+                href={`/category/men's clothing`}
                 className="rounded-2xl bg-[#5e035a] p-2 text-white hover:bg-[#71046c]"
               >
                 style it out
-              </a>
+              </Link>
             </>
           )}
           {category === "women's clothing" && (
             <>
               <div>flawless fit, zero stress!</div>
-              <a
-                href="#"
+              <Link
+                href={`/category/women's clothing`}
                 className="rounded-2xl bg-[#d5008f] p-2 text-white hover:bg-[#e700a8]"
               >
                 slay the look
-              </a>
+              </Link>
             </>
           )}
           {category === 'electronics' && (
             <>
               <div>tech that fits your life!</div>
-              <a
-                href="#"
+              <Link
+                href={`/category/electronics`}
                 className="rounded-2xl bg-[#00bfa5] p-2 text-white hover:bg-[#00e5c2]"
               >
                 shop now
-              </a>
+              </Link>
             </>
           )}
           {category === 'jewelery' && (
             <>
               <div>shine bright like a diamond!</div>
-              <a
-                href="#"
+              <Link
+                href={`/category/jewelery`}
                 className="rounded-2xl bg-[#ff6d00] p-2 text-white hover:bg-[#ff9100]"
               >
                 get the bling
-              </a>
+              </Link>
             </>
           )}
         </p>
