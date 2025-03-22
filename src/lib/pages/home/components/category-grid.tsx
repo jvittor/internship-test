@@ -12,7 +12,7 @@ const CategoryGrid = ({
 }) => {
   return (
     <div>
-      <h2 className="mb-4 text-left text-2xl font-bold text-black">
+      <h2 className="mt-10 mb-4 text-left text-2xl font-bold text-black">
         {category.toLowerCase()}
         <br />
         <p className="font-tiny text-gray-500w-full flex items-center justify-between text-sm">
