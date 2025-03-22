@@ -6,11 +6,13 @@ import { Categories } from '@/lib/entities/home/categories';
 import ProductList from '@/lib/pages/product/components/product';
 import Breadcrumbs from '@/lib/components/breadcrumbs';
 
-export default function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+type CategoryPageProps = {
+  params: {
+    category: string;
+  };
+};
+
+export default function CategoryPage({ params }: CategoryPageProps) {
   const category = decodeURIComponent(params.category);
   const [products, setProducts] = useState<Categories[]>([]);
 
