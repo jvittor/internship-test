@@ -2,6 +2,7 @@
 import * as React from 'react';
 import CategoryCard from '@/lib/pages/home/components/category-card';
 import { Categories } from '@/lib/entities/home/categories';
+import { categoryDetails } from '@/lib/config/category-details';
 
 const CategoryGrid = ({
   category,
@@ -10,59 +11,30 @@ const CategoryGrid = ({
   category: string;
   items: Categories[];
 }) => {
+  const currentCategory = categoryDetails[category];
   return (
-    <div>
-      <h2 className="mt-10 mb-4 text-left text-2xl font-bold text-black">
+    <div className="w-72 p-2 md:w-full md:p-0">
+      <h2 className="mt-10 mb-4 text-center text-2xl font-bold text-black md:text-left">
         {category.toLowerCase()}
         <br />
-        <p className="font-tiny flex w-full items-center justify-between text-sm text-gray-500">
-          {category === "men's clothing" && (
-            <>
-              <div>drip on point, no effort!</div>
-              <a
-                href={`/category/men's clothing`}
-                className="rounded-2xl bg-[#5e035a] p-2 text-white hover:bg-[#71046c]"
-              >
-                style it out
-              </a>
-            </>
-          )}
-          {category === "women's clothing" && (
-            <>
-              <div>flawless fit, zero stress!</div>
-              <a
-                href={`/category/women's clothing`}
-                className="rounded-2xl bg-[#d5008f] p-2 text-white hover:bg-[#e700a8]"
-              >
-                slay the look
-              </a>
-            </>
-          )}
-          {category === 'electronics' && (
-            <>
-              <div>tech that fits your life!</div>
-              <a
-                href={`/category/electronics`}
-                className="rounded-2xl bg-[#00bfa5] p-2 text-white hover:bg-[#00e5c2]"
-              >
-                shop now
-              </a>
-            </>
-          )}
-          {category === 'jewelery' && (
-            <>
-              <div>shine bright like a diamond!</div>
-              <a
-                href={`/category/jewelery`}
-                className="rounded-2xl bg-[#ff6d00] p-2 text-white hover:bg-[#ff9100]"
-              >
-                get the bling
-              </a>
-            </>
+        <p className="font-tiny flex w-full items-center justify-center text-sm text-gray-500 md:justify-between">
+          {currentCategory && (
+            <div className="flex grid w-full grid-cols-1 items-center justify-center text-center md:grid-cols-2 md:text-left">
+              <div>{currentCategory.message}</div>
+              <div className="flex w-auto justify-end">
+                <a
+                  href={`/category/${category}`}
+                  className="hover:bg-currentCategory-hoverColor flex hidden items-center justify-center rounded-2xl p-2 text-white md:block"
+                  style={{ backgroundColor: currentCategory.buttonColor }}
+                >
+                  {currentCategory.buttonText}
+                </a>
+              </div>
+            </div>
           )}
         </p>
       </h2>
-      <div className="grid max-w-[900px] grid-cols-12 grid-rows-2 gap-10">
+      <div className="grid-cols-0 grid-rows-0 flex grid max-w-[900px] justify-center gap-5 md:grid-cols-12 md:grid-rows-2 md:gap-10">
         {items.slice(0, 3).map((cat) => (
           <CategoryCard
             key={cat.id}
@@ -85,6 +57,19 @@ const CategoryGrid = ({
           />
         ))}
       </div>
+      <p className="font-tiny flex w-full items-center justify-center text-sm text-gray-500 md:justify-between">
+        {currentCategory && (
+          <div className="mt-5 flex grid w-full grid-cols-1 items-center justify-center text-center md:grid-cols-2 md:text-left">
+            <a
+              href={`/category/${category}`}
+              className="hover:bg-currentCategory-hoverColor block rounded-2xl p-2 text-white md:hidden"
+              style={{ backgroundColor: currentCategory.buttonColor }}
+            >
+              {currentCategory.buttonText}
+            </a>
+          </div>
+        )}
+      </p>
     </div>
   );
 };

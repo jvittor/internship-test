@@ -11,7 +11,9 @@ const CategoryCard = ({
   layout: string;
 }) => {
   return (
-    <Card className={`${layout} relative h-[300px] overflow-hidden rounded-lg`}>
+    <Card
+      className={`${layout} relative h-[300px] w-full overflow-hidden rounded-lg`}
+    >
       <CardHeader className="absolute bottom-5 left-5 z-10 flex-col !items-start">
         <div className="rounded-2xl bg-white p-2">
           <p className="text-tiny rounded-2xl bg-white font-bold text-[#5e035a] lowercase">
@@ -22,7 +24,7 @@ const CategoryCard = ({
       <Image
         removeWrapper
         alt={category.title}
-        className="z-0 h-full w-full object-cover"
+        className="z-0 h-[600px] w-[600px] object-cover md:h-full md:w-full"
         src={category.image}
       />
     </Card>
