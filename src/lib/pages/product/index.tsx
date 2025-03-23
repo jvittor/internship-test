@@ -7,32 +7,34 @@ import Breadcrumbs from '@/lib/components/breadcrumbs';
 import { CategoriesUseCases } from '@/lib/usecases/categories.usecases';
 import { Categories } from '@/lib/entities/home/categories';
 
-type Params = { category: string };
+type Params = Promise<{ category: string }>;
 
 export default function CategoryPage({ params }: { params: Params }) {
-  const decodedCategory = decodeURIComponent(params.category);
-
+  const [decodedCategory, setDecodedCategory] = useState<string>('');
   const [allProducts, setAllProducts] = useState<Categories[]>([]);
   const [products, setProducts] = useState<Categories[]>([]);
   const [hasMore, setHasMore] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    async function fetchProducts() {
+    const fetchCategory = async () => {
+      const { category } = await params;
+      const decoded = decodeURIComponent(category);
+      setDecodedCategory(decoded);
+
       try {
-        console.log('Buscando produtos para categoria:', decodedCategory);
-        const fetchedProducts =
-          await CategoriesUseCases.getCategories(decodedCategory);
+        console.log('Buscando produtos para categoria:', decoded);
+        const fetchedProducts = await CategoriesUseCases.getCategories(decoded);
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts.slice(0, 2));
         setHasMore(fetchedProducts.length > 2);
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
       }
-    }
+    };
 
-    fetchProducts();
-  }, [decodedCategory]);
+    fetchCategory();
+  }, [params]);
 
   useEffect(() => {
     const handleResize = () => {
