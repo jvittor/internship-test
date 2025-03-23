@@ -34,9 +34,9 @@ export default function ProductList({ products }: { products: Categories[] }) {
           </Card>
         ))
       ) : (
-        <p className="text-default-500 col-span-4 text-center">
-          No products found for this category.
-        </p>
+        <div className="bg-opacity-50 fixed top-0 right-0 bottom-0 left-0 z-10 flex items-center justify-center bg-white">
+          <div className="loading text-xl text-white"></div>
+        </div>
       )}
     </div>
   );

@@ -33,7 +33,11 @@ const CategoryList = ({ categories }: { categories: string[] }) => {
   }, [categories]);
 
   if (loading) {
-    return <div>Carregando categorias...</div>;
+    return (
+      <div className="bg-opacity-50 fixed top-0 right-0 bottom-0 left-0 z-10 flex items-center justify-center bg-white">
+        <div className="loading text-xl text-white"></div>
+      </div>
+    );
   }
 
   if (error) {

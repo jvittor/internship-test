@@ -1,34 +1,77 @@
-/* eslint-disable @next/next/no-async-client-component */
 'use client';
 
-import { CategoriesUseCases } from '@/lib/usecases/categories.usecases';
-import { Categories } from '@/lib/entities/home/categories';
+import { useState, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from '@/lib/pages/product/components/product';
 import Breadcrumbs from '@/lib/components/breadcrumbs';
+import { CategoriesUseCases } from '@/lib/usecases/categories.usecases';
+import { Categories } from '@/lib/entities/home/categories';
 
-type Params = Promise<{ category: string }>;
+type Params = { category: string };
 
-export default async function CategoryPage({ params }: { params: Params }) {
-  const { category } = await params;
-  const decodedCategory = decodeURIComponent(category);
+export default function CategoryPage({ params }: { params: Params }) {
+  const decodedCategory = decodeURIComponent(params.category);
 
-  let products: Categories[] = [];
-  try {
-    console.log('Buscando produtos para categoria:', decodedCategory);
-    products = await CategoriesUseCases.getCategories(decodedCategory);
-  } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
-  }
+  const [allProducts, setAllProducts] = useState<Categories[]>([]);
+  const [products, setProducts] = useState<Categories[]>([]);
+  const [hasMore, setHasMore] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        console.log('Buscando produtos para categoria:', decodedCategory);
+        const fetchedProducts =
+          await CategoriesUseCases.getCategories(decodedCategory);
+        setAllProducts(fetchedProducts);
+        setProducts(fetchedProducts.slice(0, 2));
+        setHasMore(fetchedProducts.length > 2);
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    }
+
+    fetchProducts();
+  }, [decodedCategory]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const loadMoreProducts = () => {
+    setTimeout(() => {
+      const nextProducts = allProducts.slice(0, products.length + 2);
+      setProducts(nextProducts);
+      setHasMore(nextProducts.length < allProducts.length);
+    }, 1000);
+  };
 
   return (
     <>
       <Breadcrumbs items={[{ label: decodedCategory }]} />
       <div className="flex w-full items-center justify-center">
         <div>
-          <h1 className="mb-4 text-center text-2xl font-bold md:text-left">
+          <h1 className="mb-5 text-center text-2xl font-bold md:text-left">
             Category: {decodedCategory}
           </h1>
-          <ProductList products={products} />
+          {isMobile ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={loadMoreProducts}
+              hasMore={hasMore}
+              loader={<p className="mt-10 w-full text-center">loading...</p>}
+            >
+              <ProductList products={products} />
+            </InfiniteScroll>
+          ) : (
+            <ProductList products={allProducts} />
+          )}
         </div>
       </div>
     </>

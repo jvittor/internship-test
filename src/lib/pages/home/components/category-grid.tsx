@@ -13,7 +13,7 @@ const CategoryGrid = ({
 }) => {
   const currentCategory = categoryDetails[category];
   return (
-    <div className="w-72 p-2 md:w-full md:p-0">
+    <div className="w-72 p-2 md:w-full md:p-5 lg:p-0">
       <h2 className="mt-10 mb-4 text-center text-2xl font-bold text-black md:text-left">
         {category.toLowerCase()}
         <br />
