@@ -59,7 +59,7 @@ export default function CategoryPage({ params }: { params: Params }) {
       <Breadcrumbs items={[{ label: decodedCategory }]} />
       <div className="flex w-full items-center justify-center">
         <div>
-          <h1 className="mb-5 text-center text-2xl font-bold md:text-left">
+          <h1 className="mb-5 text-center text-2xl font-bold text-black md:text-left">
             Category: {decodedCategory}
           </h1>
           {isMobile ? (
