@@ -51,7 +51,7 @@ export const Header = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 text-black">
               <div className="font-bold text-black">{user.name}</div>
               <div className="">
                 <a
@@ -77,10 +77,10 @@ export const Header = () => {
                 />
               </div>
             </div>
-            <div className="">
+            <div className="bg-white">
               <a
                 href="/login"
-                className="rounded-2xl border-2 border-black p-2 px-5 text-center text-xl font-bold hover:bg-black hover:text-white"
+                className="rounded-2xl border-2 border-black p-2 px-5 text-center text-xl font-bold text-black hover:bg-black hover:text-white"
               >
                 login
               </a>

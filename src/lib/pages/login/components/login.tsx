@@ -74,7 +74,16 @@ export default function LoginForm() {
   );
 
   useEffect(() => {
-    setIsPageLoaded(document.readyState === 'complete');
+    if (typeof window !== 'undefined') {
+      const handleLoad = () => setIsPageLoaded(false);
+
+      if (document.readyState === 'complete') {
+        handleLoad();
+      } else {
+        window.addEventListener('load', handleLoad);
+        return () => window.removeEventListener('load', handleLoad);
+      }
+    }
   }, []);
 
   return (
