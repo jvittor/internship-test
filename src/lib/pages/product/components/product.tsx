@@ -5,7 +5,7 @@ export default function ProductList({ products }: { products: Categories[] }) {
   const safeProducts = products || [];
 
   return (
-    <div className="flex grid w-4xl grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="flex grid w-full grid-cols-1 gap-2 md:w-4xl md:grid-cols-4">
       {safeProducts.length > 0 ? (
         safeProducts.map((item) => (
           <Card
@@ -14,17 +14,16 @@ export default function ProductList({ products }: { products: Categories[] }) {
             shadow="sm"
             onPress={() => console.log('item pressed')}
           >
-            <CardBody className="overflow-visible rounded-lg p-0">
+            <CardBody className="flex items-center justify-center overflow-visible rounded-lg p-0">
               <Image
                 alt={item.title}
-                className="h-[140px] w-full object-cover"
+                className="h-full w-[200px] object-cover md:h-[200px] md:w-full"
                 radius="lg"
                 shadow="sm"
                 src={item.image}
-                width="100%"
               />
             </CardBody>
-            <CardFooter className="text-small justify-between">
+            <CardFooter className="text-small grid grid-cols-1 justify-center font-bold">
               <p className="text-default-500">${item.price.toFixed(2)}</p>
               <b className="text-sm font-normal">
                 {item.title.split(' ').length > 2

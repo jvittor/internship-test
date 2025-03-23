@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
       <Breadcrumbs items={[{ label: decodedCategory }]} />
       <div className="flex w-full items-center justify-center">
         <div>
-          <h1 className="mb-4 text-2xl font-bold">
+          <h1 className="mb-4 text-center text-2xl font-bold md:text-left">
             Category: {decodedCategory}
           </h1>
           <ProductList products={products} />

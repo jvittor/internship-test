@@ -9,7 +9,7 @@ export default function Breadcrumbs({
 }) {
   return (
     <nav
-      className="mt-10 mb-10 flex items-center justify-center"
+      className="mt-5 mb-5 flex items-center justify-center p-5 md:mt-10 md:mb-10 md:p-0"
       aria-label="Breadcrumb"
       role="navigation"
     >
