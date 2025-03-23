@@ -75,7 +75,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const handleLoad = () => setIsPageLoaded(false);
+      const handleLoad = () => setIsPageLoaded(true);
 
       if (document.readyState === 'complete') {
         handleLoad();

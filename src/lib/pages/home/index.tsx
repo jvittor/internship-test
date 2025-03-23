@@ -26,14 +26,17 @@ const Home = () => {
   };
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 bg-white text-center">
+    <div className="flex min-h-[60vh] w-full flex-col items-center justify-center gap-8 bg-white text-center">
       <InfiniteScroll
+        className="w-full md:w-[900px]"
         dataLength={categories.length}
         next={loadMoreCategories}
         hasMore={hasMore}
         loader={<p className="mt-10 w-full text-center">loading...</p>}
       >
-        <CategoryList categories={categories} />
+        <div className="category-list-container">
+          <CategoryList categories={categories} />
+        </div>
       </InfiniteScroll>
     </div>
   );

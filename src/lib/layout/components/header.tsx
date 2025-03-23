@@ -77,7 +77,7 @@ export const Header = () => {
                 />
               </div>
             </div>
-            <div className="bg-white">
+            <div className="">
               <a
                 href="/login"
                 className="rounded-2xl border-2 border-black p-2 px-5 text-center text-xl font-bold text-black hover:bg-black hover:text-white"

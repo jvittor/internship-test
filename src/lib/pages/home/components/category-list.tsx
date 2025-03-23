@@ -45,7 +45,7 @@ const CategoryList = ({ categories }: { categories: string[] }) => {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="w-full space-y-12">
       {categories.map((category) => (
         <CategoryGrid
           key={category}
