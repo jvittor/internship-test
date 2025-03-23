@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import * as React from 'react';
-import { Card, CardHeader, Image } from '@heroui/react';
+import { Card, CardHeader } from '@heroui/react';
 import { Categories } from '@/lib/entities/home/categories';
 
 const CategoryCard = ({
@@ -21,8 +22,7 @@ const CategoryCard = ({
           </p>
         </div>
       </CardHeader>
-      <Image
-        removeWrapper
+      <img
         alt={category.title}
         className="z-0 h-[600px] w-[600px] object-cover md:h-full md:w-full"
         src={category.image}

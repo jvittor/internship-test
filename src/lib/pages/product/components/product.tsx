@@ -1,4 +1,5 @@
-import { Card, CardBody, CardFooter, Image } from '@heroui/react';
+/* eslint-disable @next/next/no-img-element */
+import { Card, CardBody, CardFooter } from '@heroui/react';
 import { Categories } from '@/lib/entities/home/categories';
 
 export default function ProductList({ products }: { products: Categories[] }) {
@@ -15,11 +16,9 @@ export default function ProductList({ products }: { products: Categories[] }) {
             onPress={() => console.log('item pressed')}
           >
             <CardBody className="flex items-center justify-center overflow-visible rounded-lg p-0">
-              <Image
+              <img
                 alt={item.title}
                 className="h-full w-[200px] object-cover md:h-[200px] md:w-full"
-                radius="lg"
-                shadow="sm"
                 src={item.image}
               />
             </CardBody>
