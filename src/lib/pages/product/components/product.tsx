@@ -22,7 +22,7 @@ export default function ProductList({ products }: { products: Categories[] }) {
                 src={item.image}
               />
             </CardBody>
-            <CardFooter className="text-small grid grid-cols-1 justify-center font-bold">
+            <CardFooter className="text-small grid grid-cols-1 justify-center font-bold text-black">
               <p className="text-default-500">${item.price.toFixed(2)}</p>
               <b className="text-sm font-normal">
                 {item.title.split(' ').length > 2

@@ -17,7 +17,7 @@ const CategoryCard = ({
     >
       <CardHeader className="absolute bottom-5 left-5 z-10 flex-col !items-start">
         <div className="rounded-2xl bg-white p-2">
-          <p className="text-tiny rounded-2xl bg-white font-bold text-[#5e035a] lowercase">
+          <p className="text-tiny rounded-2xl bg-white font-bold text-black lowercase">
             $ {category.price}
           </p>
         </div>

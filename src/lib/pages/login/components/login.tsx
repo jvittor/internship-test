@@ -1,16 +1,16 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, IconButton, InputAdornment } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Cookie from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { TOKEN_KEY } from '@/middleware';
 import Image from 'next/image';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import SkeletonLoginForm from '@/lib/pages/login/components/skeleton-login';
 import { LoginUseCase } from '@/lib/usecases/user.usecases';
 
 const CustomTextField = styled(TextField)({});
@@ -23,40 +23,55 @@ export default function LoginForm() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   const handleLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
+    setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
-    try {
-      const useCase = new LoginUseCase();
-      const result = await useCase.execute(loginData);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError(null);
 
-      if (result.success) {
-        if (result.token) {
-          Cookie.set(TOKEN_KEY, result.token, { expires: 7 });
-        } else {
-          throw new Error('token is undefined');
-        }
-        toast.success('success login!');
-        router.push('/');
-      } else {
-        toast.error('incorrect email or password.');
+      if (!validateEmail(loginData.email)) {
+        toast.error('Invalid email format.');
+        return;
       }
-    } catch (err) {
-      setError('an unexpected error occurred.');
-    } finally {
-      setLoading(false);
-    }
-  };
+
+      setLoading(true);
+
+      try {
+        const useCase = new LoginUseCase();
+        const result = await useCase.execute(loginData);
+
+        if (result.success) {
+          if (result.token) {
+            Cookie.set(TOKEN_KEY, result.token, { expires: 7 });
+          } else {
+            throw new Error('token is undefined');
+          }
+          toast.success('success login!');
+          router.push('/');
+        } else {
+          toast.error('incorrect email or password.');
+        }
+      } catch (err) {
+        setError('an unexpected error occurred.');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [loginData, router]
+  );
 
   useEffect(() => {
     setIsPageLoaded(document.readyState === 'complete');
@@ -78,6 +93,7 @@ export default function LoginForm() {
                 width={200}
                 height={200}
                 alt="logo"
+                priority // Importante para otimizar o carregamento da imagem
               />
               <CustomTextField
                 required
@@ -88,31 +104,67 @@ export default function LoginForm() {
                 fullWidth
                 onChange={handleLogin}
                 value={loginData.email}
+                error={
+                  loginData.email !== '' && !validateEmail(loginData.email)
+                }
+                helperText={
+                  loginData.email !== '' && !validateEmail(loginData.email)
+                    ? 'Invalid email format'
+                    : ''
+                }
               />
               <CustomTextField
                 required
                 id="password"
                 name="password"
                 label="password"
+                type={showPassword ? 'text' : 'password'}
                 variant="outlined"
                 fullWidth
                 onChange={handleLogin}
                 value={loginData.password}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <button
                 type="submit"
-                className="border-black-300 text-black-300 flex w-full items-center justify-center rounded-lg border-2 bg-white p-2 text-xl font-semibold shadow-[rgba(0,0,15,0.5)_-3px_5px_4px_0px] hover:bg-black hover:text-white"
+                className="flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-black bg-white p-2 text-xl font-semibold text-black shadow-[rgba(0,0,15,0.5)_-3px_5px_4px_0px] hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={loading}
               >
-                {loading ? <CircularProgress size="30px" /> : 'ENTRAR'}
+                {loading ? (
+                  <div className="flex w-full items-center justify-center">
+                    <div className="loading"></div>
+                  </div>
+                ) : (
+                  'entrar'
+                )}
               </button>
-              <a href="/">
-                <p className="font-normal underline">back to homepage</p>
-              </a>
+              <button
+                type="button"
+                onClick={() => router.push('/')}
+                className="mt-4 cursor-pointer"
+              >
+                <p className="font-normal text-black underline">
+                  back to homepage
+                </p>
+              </button>
             </form>
           </div>
         </div>
       ) : (
-        <SkeletonLoginForm />
+        <div className="flex w-full items-center justify-center p-10">
+          <div className="loading"></div>
+        </div>
       )}
     </div>
   );

@@ -32,7 +32,7 @@ export const Header = () => {
     initializeUser();
   }, []);
   return (
-    <header className="sticky top-0 z-99 flex w-full justify-center border-b-2 border-black p-5 backdrop-blur-md">
+    <header className="sticky top-0 z-99 flex w-full justify-center border-b-2 border-black bg-white/60 p-5 backdrop-blur-md">
       <section className="flex w-4xl items-center justify-between bg-[#00000]">
         {isLoading ? (
           <div className="flex w-full items-center justify-center p-10">
@@ -52,12 +52,12 @@ export const Header = () => {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div className="font-bold">{user.name}</div>
+              <div className="font-bold text-black">{user.name}</div>
               <div className="">
                 <a
                   href="#"
                   onClick={logout}
-                  className="rounded-2xl border-2 border-black p-2 px-5 text-center text-xl font-bold hover:bg-black hover:text-white"
+                  className="rounded-2xl border-2 border-black p-2 px-5 text-center text-xl font-bold text-black hover:bg-black hover:text-white"
                 >
                   logout
                 </a>

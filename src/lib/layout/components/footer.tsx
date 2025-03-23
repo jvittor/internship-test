@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className="wrapper mt-5">
+    <footer className="wrapper mt-5 bg-white">
       <div className="flex">
         <p className="text-xs">
           {new Date().getFullYear()} -{' '}

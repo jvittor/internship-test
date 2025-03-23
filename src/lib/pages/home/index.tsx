@@ -26,7 +26,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 text-center">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 bg-white text-center">
       <InfiniteScroll
         dataLength={categories.length}
         next={loadMoreCategories}
