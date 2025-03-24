@@ -62,7 +62,7 @@ como não estamos utilizando um backend para autenticação, o login está confi
 
 essas credenciais devem ser inseridas no formulário de login da aplicação
 
-**OBS**: para acaessar a página de lsitagem de categorias específicas e necessário login.
+**OBS**: para acessar a página de lsitagem de categorias específicas e necessário login.
 
 
 **lista de categorias**
