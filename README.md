@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://ibb.co/KjVHfm6w">
-    <img src="https://i.ibb.co/JRrPGCnQ/image.png" alt="Logo" width=72 height=72>
+    <img src="/assets/logo" alt="Logo" width=72 height=72>
   </a>
   <p align="center">
     [r-shop]<br />descrição e funcionalidades
