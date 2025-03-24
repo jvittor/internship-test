@@ -49,7 +49,7 @@ pnpm dev
 **design Responsivo**
 a aplicação é totalmente responsiva. ela se adapta a qualquer tamanho de tela, garantindo uma experiência fluida no celular e no desktop. Em telas grandes, a aplicação exibe o conteúdo em um layout de grid. em dispositivos menores, o layout é ajustado para uma exibição em coluna única, facilitando a navegação.
 
-**Scroll Infinito**
+**scroll Infinito**
 a página inicial contém uma lista de categorias carregadas dinamicamente. conforme o usuário rola para baixo, novas categorias são carregadas e adicionadas à lista. Isso é feito utilizando o componente React Infinite Scroll, que ajuda a reduzir o tempo de carregamento inicial e otimiza a experiência do usuário.
 
 **formulário de Login**
@@ -60,7 +60,9 @@ como não estamos utilizando um backend para autenticação, o login está confi
 - **Email**: `teste@exemplo.com`
 - **Senha**: `senha123`
 
-essas credenciais devem ser inseridas no formulário de login da aplicação.
+essas credenciais devem ser inseridas no formulário de login da aplicação
+
+**OBS**: para acaessar a página de lsitagem de categorias específicas e necessário login.
 
 
 **lista de categorias**
